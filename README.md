@@ -47,3 +47,7 @@ From the arduino board file:
 //            GND  4|    |5  PB0 (D 0) pwm0
 //                  +----+
 ```
+What this means:
+* You've got 6 pins you can play with.
+* All 6 can be configured as digital ins or outs.  When you refer to 0 in ardunio, you are really referencing the bottom left pin (physical pin 5) on the ATTINY chip.
+* 4 of the pins can be configured as Analog inputs.  A0 is the top-left (physical pin 1), followed by A3, then A2.  A1 is across from A3.
