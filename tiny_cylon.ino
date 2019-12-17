@@ -1,8 +1,11 @@
   
-// 74595 lines
-#define DATA_PIN  0
-#define CLK_PIN   1
-#define LATCH_PIN 2
+// 74595 lines 
+#define DATA_PIN  0      // maps to pin 5 on tiny
+#define CLK_PIN   1      // ...pin 6
+#define LATCH_PIN 2      // ...pin 7
+
+// ADC line
+#define SPEED_PIN   A3     // Maps to pin ... on tiny
 
 // We have 8 output LEDs in our current incarnation.
 #define OUTPUT_LINES 8
@@ -139,8 +142,9 @@ void setup()
 //==============================================================================================
 void loop() 
 {
-  static int eye_pos = 0x01;
+  static int  eye_pos = 0x01;
   static bool fwd = true;
+  int         wait_ms;
   
   write_and_latch_byte(eye_pos);
   
@@ -169,5 +173,9 @@ void loop()
     }
   }
 
-  delay(250);
+  // Analog read should give us a number between 0 and 1024. 
+  // Use that as a number to determine update speed in ms.
+  wait_ms = analogRead(SPEED_PIN);
+
+  delay(wait_ms);
 }
